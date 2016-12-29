@@ -1,7 +1,14 @@
 
 jQuery.extend({
 	
-
+    handleError: function (s, xhr, status, e) {
+        if (s.error) {
+            s.error.call(s.context || s, xhr, status, e);
+        }
+        if (s.global) {
+            (s.context ? jQuery(s.context) : jQuery.event).trigger("ajaxError", [xhr, s, e]);
+        }
+    },
     createUploadIframe: function(id, uri)
 	{
 			//create frame
