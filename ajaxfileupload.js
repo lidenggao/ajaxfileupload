@@ -70,7 +70,7 @@ jQuery.extend({
 		}            
         var requestDone = false;
         // Create the request object
-        var xml = {getResponseHeader:function(){}}   
+        var xml = {getResponseHeader:function(){return false}}   
         if ( s.global )
             jQuery.event.trigger("ajaxSend", [xml, s]);
         // Wait for a response to come back
