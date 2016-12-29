@@ -1,7 +1,7 @@
 
 jQuery.extend({
 	
-    handleError: function (s, xhr, status, e) {
+	handleError: function (s, xhr, status, e) {
         if (s.error) {
             s.error.call(s.context || s, xhr, status, e);
         }
@@ -70,7 +70,7 @@ jQuery.extend({
 		}            
         var requestDone = false;
         // Create the request object
-        var xml = {}   
+        var xml = {getResponseHeader:function(){}}   
         if ( s.global )
             jQuery.event.trigger("ajaxSend", [xml, s]);
         // Wait for a response to come back
@@ -196,8 +196,11 @@ jQuery.extend({
         if ( type == "script" )
             jQuery.globalEval( data );
         // Get the JavaScript object, if JSON is used.
-        if ( type == "json" )
-            eval( "data = " + data );
+        if ( type == "json" ){
+        	data = ($(data).text());
+        	eval( "data = " + data );
+        }
+            
         // evaluate scripts within html
         if ( type == "html" )
             jQuery("<div>").html(data).evalScripts();
